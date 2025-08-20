@@ -2746,7 +2746,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4581959275002222671, guid: c35a6542c3a18404db7ae48a7e3423a8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 4581959275002222671, guid: c35a6542c3a18404db7ae48a7e3423a8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2778,7 +2778,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4849303075928474994, guid: c35a6542c3a18404db7ae48a7e3423a8, type: 3}
       propertyPath: CameraDistance
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7277756148064433705, guid: c35a6542c3a18404db7ae48a7e3423a8, type: 3}
       propertyPath: Target.TrackingTarget
@@ -2868,7 +2868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2894813700085287988, guid: 5bcb80fb38441f3409de83764f8bb9ae, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -14
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 2894813700085287988, guid: 5bcb80fb38441f3409de83764f8bb9ae, type: 3}
       propertyPath: m_LocalRotation.w
