@@ -1,10 +1,9 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
-{   
+{
     [SerializeField] InputAction thrust;
-    [SerializeField] InputAction rotation;
     [SerializeField] float thrustStrength = 100f;
     [SerializeField] float rotationStrength = 100f;
     [SerializeField] AudioClip mainEngineSFX;
@@ -15,16 +14,20 @@ public class Movement : MonoBehaviour
     Rigidbody rb;
     AudioSource audioSource;
 
-    private void Start() 
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        audioSource = GetComponent<AudioSource>();    
+        audioSource = GetComponent<AudioSource>();
     }
 
-    private void OnEnable() 
+    private void OnEnable()
     {
-        thrust.Enable(); 
-        rotation.Enable();
+        thrust.Enable();
+    }
+
+    private void OnDisable()
+    {
+        thrust.Disable();
     }
 
     private void FixedUpdate()
@@ -66,14 +69,18 @@ public class Movement : MonoBehaviour
 
     private void ProcessRotation()
     {
-        float rotationInput = rotation.ReadValue<float>();
-        if(rotationInput < 0)
-        {
-            RotateRight();
-        }
-        else if(rotationInput > 0)
+        // A or Right Arrow → Rotate Left
+        // D or Left Arrow → Rotate Right
+        bool rotateLeft = Keyboard.current.aKey.isPressed || Keyboard.current.rightArrowKey.isPressed;
+        bool rotateRight = Keyboard.current.dKey.isPressed || Keyboard.current.leftArrowKey.isPressed;
+
+        if (rotateLeft)
         {
             RotateLeft();
+        }
+        else if (rotateRight)
+        {
+            RotateRight();
         }
         else
         {
@@ -114,3 +121,4 @@ public class Movement : MonoBehaviour
         rb.freezeRotation = false;
     }
 }
+
