@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour
     [SerializeField] InputAction thrust;
     [SerializeField] float thrustStrength = 100f;
     [SerializeField] float rotationStrength = 100f;
+    [SerializeField] float customGravity = -9.81f; // adjustable gravity multiplier
     [SerializeField] AudioClip mainEngineSFX;
     [SerializeField] ParticleSystem mainEngineParticles;
     [SerializeField] ParticleSystem rightThrustParticles;
@@ -32,8 +33,15 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        ApplyCustomGravity();
         ProcessThrust();
         ProcessRotation();
+    }
+
+    private void ApplyCustomGravity()
+    {
+        // Apply extra gravity manually
+        rb.AddForce(Vector3.up * customGravity, ForceMode.Acceleration);
     }
 
     private void ProcessThrust()
@@ -69,10 +77,10 @@ public class Movement : MonoBehaviour
 
     private void ProcessRotation()
     {
-        // A or Right Arrow → Rotate Left
-        // D or Left Arrow → Rotate Right
-        bool rotateLeft = Keyboard.current.aKey.isPressed || Keyboard.current.rightArrowKey.isPressed;
-        bool rotateRight = Keyboard.current.dKey.isPressed || Keyboard.current.leftArrowKey.isPressed;
+        // A or Left Arrow → Rotate Left
+        // D or Right Arrow → Rotate Right
+        bool rotateLeft = Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed;
+        bool rotateRight = Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed;
 
         if (rotateLeft)
         {
@@ -116,9 +124,9 @@ public class Movement : MonoBehaviour
 
     private void ApplyRotation(float rotationThisFrame)
     {
-        rb.freezeRotation = true;
+        rb.freezeRotation = true; // take manual control of rotation
         transform.Rotate(Vector3.forward * rotationThisFrame * Time.fixedDeltaTime);
-        rb.freezeRotation = false;
+        rb.freezeRotation = false; // resume physics control
     }
 }
 
